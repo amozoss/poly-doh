@@ -20,6 +20,7 @@ var merge = require('merge-stream');
 var path = require('path');
 var fs = require('fs');
 var glob = require('glob');
+var argv = require('yargs').argv;
 var historyApiFallback = require('connect-history-api-fallback');
 
 var AUTOPREFIXER_BROWSERS = [
@@ -88,7 +89,7 @@ gulp.task('copy', function () {
     '!app/precache.json'
   ], {
     dot: true
-  }).pipe(gulp.dest('dist'));
+  }).pipe(gulp.dest(argv.android ? '../app/src/main/assets/dist' : 'dist'));
 
   var bower = gulp.src([
     'bower_components/**/*'
