@@ -94,6 +94,12 @@ gulp.task('copy', function () {
     'bower_components/**/*'
   ]).pipe(gulp.dest('dist/bower_components'));
 
+  var doh = gulp.src(['app/doh/javascript/**/*.js'])
+    .pipe(gulp.dest('dist/doh/javascript'));
+
+  var dohIndex = gulp.src(['app/doh/html/index.html', 'app/doh/html/**/*.js', 'app/doh/html/**/*.css'])
+    .pipe(gulp.dest('dist/doh/html'));
+
   var elements = gulp.src(['app/elements/**/*.html'])
     .pipe(gulp.dest('dist/elements'));
 
@@ -107,7 +113,7 @@ gulp.task('copy', function () {
     .pipe($.rename('elements.vulcanized.html'))
     .pipe(gulp.dest('dist/elements'));
 
-  return merge(app, bower, elements, vulcanized, swBootstrap, swToolbox)
+  return merge(app, bower, doh, elements, vulcanized, swBootstrap, swToolbox)
     .pipe($.size({title: 'copy'}));
 });
 
@@ -122,7 +128,7 @@ gulp.task('fonts', function () {
 gulp.task('html', function () {
   var assets = $.useref.assets({searchPath: ['.tmp', 'app', 'dist']});
 
-  return gulp.src(['app/**/*.html', '!app/{elements,test}/**/*.html'])
+  return gulp.src(['app/**/*.html', 'app/doh/html/index.html', '!app/{elements,test,doh}/**/*.html', ])
     // Replace path for vulcanized assets
     .pipe($.if('*.html', $.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
     .pipe(assets)

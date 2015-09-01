@@ -1,0 +1,3 @@
+[submodule "app/doh"]
+	path = app/doh
+	url = https://github.com/onionjake/doh.git

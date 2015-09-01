@@ -1,0 +1,71 @@
+<!--
+ * Copyright (c) 2012 Jake Willoughby
+ * 
+ * This file is part of DOH.
+ * 
+ * DOH is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ * 
+ * DOH is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with DOH.  See gpl3.txt. If not, see <http://www.gnu.org/licenses/>.
+-->
+<link rel="import" href="../../doh/html/index.html">
+
+<dom-module id="poly-doh">
+  <style>
+    :host {
+      display: block;
+    }
+
+    #generate::shadow paper-ripple {
+        color: var(--paper-blue-600);
+    }
+
+    paper-radio-button {
+      display: block;
+    }
+  </style>
+  <template>
+    <div class="center layout">
+      <paper-input id="domain" label="Domain"></paper-input></paper-input>
+      <paper-input id="salt" label="Salt"></paper-input></paper-input>
+      <paper-input id="seq" label="Sequence String"></paper-input></paper-input>
+      <paper-input id="master" label="Master Password" type="password"></paper-input></paper-input>
+    </div>
+
+    <div class="vertical layout">
+      <paper-radio-group selected="DOHsha256">
+        <paper-radio-button name="DOHsha1">DOH - SHA1</paper-radio-button>
+        <paper-radio-button name="DOHsha256">DOH - SHA256</paper-radio-button>
+        <paper-radio-button name="INSECUREmd5hash">INSECURE - md5sum</paper-radio-button>
+        <paper-radio-button name="INSECUREangel">INSECURE - angel</paper-radio-button>
+      </paper-radio-group>
+    <br/>
+    <paper-button id="generate" >Generate</paper-button>
+    </div>
+  </template>
+
+  <script>
+    (function () {
+      Polymer({
+        is: 'poly-doh',
+        properties: {
+          items: {
+            type: Array,
+            notify: true,
+          }
+        },
+        ready: function() {
+        }
+      });
+    })();
+  </script>
+
+</dom-module>
